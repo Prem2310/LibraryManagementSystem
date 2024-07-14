@@ -42,9 +42,9 @@ export default function Sidebar() {
         </div>
       </div>
       <div className="text-stone-500  flex flex-col mx-auto mb-[3vh]   gap-[1vh]">
-        <a href="">About</a>
-        <a href="">Support</a>
-        <a href="">Terms & Conditions</a>
+        <a href="" className="hover:text-black">About</a>
+        <a href="" className="hover:text-black">Support</a>
+        <a href="" className="hover:text-black">Terms & Conditions</a>
       </div>
     </div>
   );
