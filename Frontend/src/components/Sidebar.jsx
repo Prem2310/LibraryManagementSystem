@@ -1,51 +1,48 @@
-import { IoSearchSharp } from "react-icons/io5";
-import { IoMdHome } from "react-icons/io";
-import { GiBookshelf } from "react-icons/gi";
+import React from "react";
+import {
+  IoHomeOutline,
+  IoSearchOutline,
+  IoBookOutline,
+  IoSettingsOutline,
+  IoHelpCircleOutline,
+} from "react-icons/io5";
+import { RiDashboardLine, RiUserLine, RiBookletLine } from "react-icons/ri";
 
-export default function Sidebar() {
+export default function AdminSidebar() {
   return (
-    <div className="w-[20vw]  flex flex-col justify-between">
-      <div className="flex flex-col m-auto mt-[15vh] gap-[5vh]">
-        <div className="sidebar-links flex  text-xl gap-[1vw]">
-          <div className="text-stone-500   ">
-            <IoMdHome className="h-[5vh] w-[5vh]" />
-          </div>
-          <div>
-            {" "}
-            <a
-              href="#"
-              className=" text-stone-500 font-normal align-baseline  focus:text-black focus:font-semibold hover:text-black ">
-              Home
-            </a>{" "}
-          </div>
-        </div>
-        <div className="sidebar-links flex  text-xl gap-[1vw]">
-          <div className="text-stone-500  ">
-            <IoSearchSharp className="h-[5vh] w-[5vh]" />
-          </div>
-          <a
-            href="#"
-            className=" text-stone-500 font-normal align-baseline focus:text-black focus:font-semibold hover:text-black ">
-            Search
-          </a>{" "}
-        </div>
-        <div className="sidebar-links flex font-normal text-xl gap-[1vw]">
-          <div className="text-stone-500 ">
-            {" "}
-            <GiBookshelf className="h-[5vh] w-[5vh]" />
-          </div>
-          <a
-            href="#"
-            className=" text-stone-500 font-normal align-baseline focus:text-black focus:font-semibold hover:text-black ">
-            My Shelf
-          </a>{" "}
-        </div>
-      </div>
-      <div className="text-stone-500  flex flex-col mx-auto mb-[3vh]   gap-[1vh]">
-        <a href="" className="hover:text-black">About</a>
-        <a href="" className="hover:text-black">Support</a>
-        <a href="" className="hover:text-black">Terms & Conditions</a>
+    <div className="bg-gradient-to-b  overflow-y-hidden from-orange-600 to-orange-800 w-64 min-h-screen text-white">
+      <nav className="mt-6">
+        <SidebarLink icon={<RiDashboardLine />} text="Dashboard" />
+        <SidebarLink icon={<IoHomeOutline />} text="Home" />
+        <SidebarLink icon={<IoSearchOutline />} text="Search" />
+        <SidebarLink icon={<IoBookOutline />} text="My Shelf" />
+        <SidebarLink icon={<IoSettingsOutline />} text="Settings" />
+      </nav>
+      <div className="absolute bottom-0 w-full p-6 ">
+        <FooterLink icon={<IoHelpCircleOutline />} text="Help & Support" />
       </div>
     </div>
+  );
+}
+
+function SidebarLink({ icon, text }) {
+  return (
+    <a
+      href="#"
+      className="flex items-center px-6 py-3 text-white hover:bg-orange-700 transition-colors duration-200">
+      <span className="mr-4 text-xl">{icon}</span>
+      <span className="text-sm font-medium">{text}</span>
+    </a>
+  );
+}
+
+function FooterLink({ icon, text }) {
+  return (
+    <a
+      href="#"
+      className="flex items-center text-sm text-white hover:text-orange-200">
+      <span className="mr-2 text-lg">{icon}</span>
+      {text}
+    </a>
   );
 }
