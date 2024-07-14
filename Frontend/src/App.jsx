@@ -7,6 +7,7 @@ import { LibStatsPage } from "./pages/LibStatsPage";
 import Signin from "./pages/SignIn";
 import Signup from "./pages/SignUp";
 import { AdminPage } from "./pages/AdminPage";
+import { UserBooksPage } from "./pages/UserBooksPage";
 
 function App() {
   return (
@@ -20,6 +21,8 @@ function App() {
           <Route path="/signin" element={<Signin />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/update-books" element={<AdminPage />} />
+          <Route path="/user-books" element={<UserBooksPage/>} />
+
         </Routes>
       </BrowserRouter>
     </>
