@@ -14,12 +14,12 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/search-books" element={<BookSearchPage/>} />
-          <Route path="/admin-books" element={<AdminSearchPage/>} />
-          <Route path="/lib-stats" element={<LibStatsPage/>} />
+          <Route path="/search-books" element={<BookSearchPage />} />
+          <Route path="/admin-books" element={<AdminSearchPage />} />
+          <Route path="/lib-stats" element={<LibStatsPage />} />
           <Route path="/signin" element={<Signin />} />
-          <Route path="/update-books" element={<AdminPage/>} />
-
+          <Route path="/signup" element={<Signup />} />
+          <Route path="/update-books" element={<AdminPage />} />
         </Routes>
       </BrowserRouter>
     </>
