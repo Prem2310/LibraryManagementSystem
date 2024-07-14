@@ -146,6 +146,7 @@
 // };
 
 // export default LibStats;
+
 import React, { useState, useEffect } from 'react';
 import { IoNotificationsOutline, IoBookOutline, IoCalendarOutline, IoWalletOutline, IoArrowUpCircleOutline } from 'react-icons/io5';
 import { Bar } from 'react-chartjs-2';
@@ -194,9 +195,20 @@ const graphData = {
     {
       label: 'Books Borrowed',
       data: [5, 10, 7, 15],
-      backgroundColor: 'rgba(249, 115, 22, 0.6)',
-      borderColor: 'rgba(249, 115, 22, 1)',
+      backgroundColor: [
+        'rgba(255, 99, 132, 0.8)',
+        'rgba(54, 162, 235, 0.8)',
+        'rgba(255, 206, 86, 0.8)',
+        'rgba(75, 192, 192, 0.8)',
+      ],
+      borderColor: [
+        'rgba(255, 99, 132, 1)',
+        'rgba(54, 162, 235, 1)',
+        'rgba(255, 206, 86, 1)',
+        'rgba(75, 192, 192, 1)',
+      ],
       borderWidth: 1,
+      borderRadius: 5,
     },
   ],
 };
@@ -228,9 +240,7 @@ const LibStats = () => {
       <div className="max-w-7xl mx-auto">
         <div className="flex justify-between items-center mb-8">
           <h1 className="text-4xl font-bold text-gray-800">Library Dashboard</h1>
-          <button className="px-4 py-2 bg-orange-500 text-white rounded-full hover:bg-orange-600 transition-colors duration-300 flex items-center">
-            <IoArrowUpCircleOutline className="mr-2" /> Generate Report
-          </button>
+          
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
@@ -258,21 +268,46 @@ const LibStats = () => {
 
         <div className="bg-white p-6 rounded-xl shadow-md mb-8">
           <h2 className="text-2xl font-semibold text-gray-700 mb-4">Books Borrowed Over Time</h2>
-          <Bar 
-            data={graphData} 
-            options={{
-              responsive: true,
-              plugins: {
-                legend: {
-                  position: 'top',
+          <div className="w-full md:w-2/3 lg:w-1/2 mx-auto">
+            <Bar 
+              data={graphData} 
+              options={{
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                  legend: {
+                    display: false,
+                  },
+                  title: {
+                    display: true,
+                    text: 'Weekly Borrowing Trend',
+                    font: {
+                      size: 16,
+                      weight: 'bold',
+                    },
+                    padding: {
+                      top: 10,
+                      bottom: 30,
+                    },
+                  },
                 },
-                title: {
-                  display: true,
-                  text: 'Monthly Borrowing Trend'
-                }
-              }
-            }}
-          />
+                scales: {
+                  x: {
+                    grid: {
+                      display: false,
+                    },
+                  },
+                  y: {
+                    beginAtZero: true,
+                    ticks: {
+                      precision: 0,
+                    },
+                  },
+                },
+              }}
+              height={300}
+            />
+          </div>
         </div>
 
         <div className="bg-white p-6 rounded-xl shadow-md overflow-hidden">
