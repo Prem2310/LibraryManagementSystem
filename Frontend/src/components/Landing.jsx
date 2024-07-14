@@ -78,7 +78,7 @@ export default function Landing() {
   };
 
   return (
-    <div className="flex flex-col gap-8 bg-gray-100 min-h-screen">
+    <div className="flex flex-col gap-8 min-h-screen">
       <div className="flex justify-center mt-10">
         <form onSubmit={handleSearch} className="flex gap-5 justify-between bg-white shadow-sm w-1/2 h-[9vh] px-5 rounded-full border-2 border-orange-400">
           <input 
