@@ -23,7 +23,7 @@ export default function AdminSidebar() {
         <SidebarLink icon={<RiBookletLine />} text="Loans" />
         <SidebarLink icon={<IoSettingsOutline />} text="Settings" />
       </nav>
-      <div className="absolute bottom-0 w-full p-6 border-t border-orange-500">
+      <div className="absolute bottom-0 w-full p-6 ">
         <FooterLink icon={<IoHelpCircleOutline />} text="Help & Support" />
       </div>
     </div>

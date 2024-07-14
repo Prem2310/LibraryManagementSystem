@@ -6,6 +6,7 @@ import { LibStatsPage } from "./pages/LibStatsPage";
 
 import Signin from "./pages/SignIn";
 import Signup from "./pages/SignUp";
+import { AdminPage } from "./pages/AdminPage";
 
 function App() {
   return (
@@ -17,6 +18,8 @@ function App() {
           <Route path="/admin-books" element={<AdminSearchPage/>} />
           <Route path="/lib-stats" element={<LibStatsPage/>} />
           <Route path="/signin" element={<Signin />} />
+          <Route path="/update-books" element={<AdminPage/>} />
+
         </Routes>
       </BrowserRouter>
     </>
