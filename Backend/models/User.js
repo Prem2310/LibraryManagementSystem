@@ -18,6 +18,13 @@ const UserSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  phoneNumber: {
+    type: Number,
+  },
+  address: {
+    type: String,
+  },
+
   role: {
     type: String,
     enum: ["Admin", "Librarian", "User"],
@@ -34,5 +41,6 @@ const UserSchema = new mongoose.Schema({
   token: {
     type: String,
   },
+  borrowedBooks: [{ type: mongoose.Schema.Types.ObjectId, ref: "Book" }],
 });
 module.exports = mongoose.model("User", UserSchema);
