@@ -95,7 +95,7 @@ const SearchBooks = () => {
   ]; // Filter out any falsy values
 
   return (
-    <div className="flex flex-col min-h-screen  bg-gray-100">
+    <div className="flex flex-col min-h-screen  bg-gray-100 w-[90vw] ">
       <div className="flex justify-center mt-10 mb-8">
         <form
           onSubmit={handleSearch}
