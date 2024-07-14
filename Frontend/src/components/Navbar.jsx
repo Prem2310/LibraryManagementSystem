@@ -12,7 +12,6 @@ export default function Navbar() {
         <div className="flex justify-between items-center h-16">
           <div className="flex items-center">
             <button className="text-gray-500 hover:text-orange-600 focus:outline-none focus:text-orange-600 mr-4">
-              <IoMenuOutline className="h-6 w-6" />
             </button>
             <span className="text-2xl font-bold text-orange-600">
               Public Library
