@@ -8,11 +8,11 @@ export default function Navbar() {
           Public Library
         </div>
       </div>
-      <div className="nav-right flex gap-1 ">
-        <button className="  w-[8vw] h-[7vh] text-xl font-semibold bg-orange-100 text-orange-600 border border-orange-600 self-center rounded-lg">
+      <div className="nav-right flex ">
+        <button className=" w-[8vw] h-[7vh] text-xl font-semibold bg-orange-100 text-orange-600 border border-orange-600 self-center rounded-full hover:bg-orange-600 hover:text-white">
           Login
         </button>
-        <button className="  w-[8vw] h-[7vh] text-xl font-semibold bg-orange-100 text-orange-600 border border-orange-600 self-center rounded-lg m-2">
+        <button className="  w-[8vw] h-[7vh] text-xl font-semibold bg-orange-100 text-orange-600 border border-orange-600 self-center rounded-full m-5 hover:bg-orange-600 hover:text-white">
           Sign In
         </button>
       </div>
