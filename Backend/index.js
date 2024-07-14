@@ -4,6 +4,7 @@ const cors = require("cors");
 const db = require("./config/dbconnect");
 const authRoute = require("./routes/Auth");
 const bookRoute = require("./routes/Books");
+const transactionRoute = require("./routes/Transaction");
 const app = express();
 require("dotenv").config();
 
@@ -13,6 +14,7 @@ app.use(express.json());
 
 app.use("/api/auth", authRoute);
 app.use("/api/books", bookRoute);
+app.use("/api/transactions", transactionRoute);
 app.get("/", (req, res) => {
   res.send("Backend is working");
 });

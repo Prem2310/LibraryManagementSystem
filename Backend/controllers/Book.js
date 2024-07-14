@@ -1,5 +1,6 @@
 const axios = require("axios");
 const Book = require("../models/Book");
+const User = require("../models/User");
 
 // Get all books
 const getAllBooks = async (req, res) => {
@@ -18,34 +19,60 @@ const addBook = async (req, res) => {
     await newBook.save();
     res.status(201).json(newBook);
   } catch (error) {
-    res.status(500).json({ message: "Error adding book" });
+    res
+      .status(500)
+      .json({ message: "Error adding book", error: error.message });
   }
 };
 
 // Update a book
 const updateBook = async (req, res) => {
   try {
-    const updatedBook = await Book.findByIdAndUpdate(req.params.id, req.body, {
-      new: true,
-    });
+    const { id, ...updatedData } = req.body;
+
+    // Find and update the book by the custom `id` field
+    const updatedBook = await Book.findOneAndUpdate(
+      { id: req.params.id }, // Using the custom `id` field here
+      updatedData,
+      {
+        new: true,
+      }
+    );
+
+    // Check if the book was found and updated
+    if (!updatedBook) {
+      return res.status(404).json({ message: "Book not found" });
+    }
+
     res.json(updatedBook);
   } catch (error) {
-    res.status(500).json({ message: "Error updating book" });
+    res
+      .status(500)
+      .json({ message: "Error updating book", error: error.message });
   }
 };
 
 // Delete a book
 const deleteBook = async (req, res) => {
   try {
-    await Book.findByIdAndDelete(req.params.id);
-    res.status(204).json();
+    // Use findOneAndDelete to find the book by the custom `id` field
+    const deletedBook = await Book.findOneAndDelete({ id: req.params.id });
+
+    // Check if the book was found and deleted
+    if (!deletedBook) {
+      return res.status(404).json({ message: "Book not found" });
+    }
+
+    res.status(204).json(); // No content on successful deletion
   } catch (error) {
-    res.status(500).json({ message: "Error deleting book" });
+    res
+      .status(500)
+      .json({ message: "Error deleting book", error: error.message });
   }
 };
 
 async function fetchTrendingBooks() {
-  const url = `https://www.googleapis.com/books/v1/volumes?q=popular&orderBy=relevance&maxResults=10&key=${process.env.BOOK_API_KEY}`;
+  const url = `https://www.googleapis.com/books/v1/volumes?q=Science&orderBy=relevance&maxResults=10&key=${process.env.BOOK_API_KEY}`;
   try {
     const response = await axios.get(url);
     const books = response.data.items.map((item) => {
@@ -88,11 +115,53 @@ async function fetchTrendingBooks() {
   }
 }
 
+// Borrow a book
+const borrowBook = async (req, res) => {
+  try {
+    const userId = req.user.id; // Assuming user info is in req.user
+    const bookId = req.params.id; // Get book ID from the request parameters
+
+    // Find the book
+    const book = await Book.findById(bookId);
+
+    if (!book) {
+      return res.status(404).json({ message: "Book not found" });
+    }
+
+    // Check if there are available copies
+    if (book.numOfCopies <= 0) {
+      return res
+        .status(400)
+        .json({ message: "No copies available for borrowing" });
+    }
+
+    // Decrement the number of available copies
+    book.numOfCopies -= 1; // Decrease count by one
+
+    // If there are no copies left, set isAvailable to false
+    if (book.numOfCopies === 0) {
+      book.isAvailable = false; // Mark book as not available
+    }
+
+    await book.save(); // Save the updated book
+
+    // Update the user's borrowedBooks
+    const user = await User.findById(userId);
+    user.borrowedBooks.push(bookId); // Add book to the user's borrowed list
+    await user.save(); // Save the updated user
+
+    res.status(200).json({ message: "Book borrowed successfully", book });
+  } catch (error) {
+    res
+      .status(500)
+      .json({ message: "Error borrowing book", error: error.message });
+  }
+};
+
 module.exports = {
   getAllBooks,
   addBook,
   updateBook,
   deleteBook,
   fetchTrendingBooks,
-  // You can also export fetchBooks and insertBooks if needed
 };
