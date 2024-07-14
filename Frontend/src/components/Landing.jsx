@@ -1,5 +1,5 @@
 import { IoSearchSharp } from "react-icons/io5";
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useUser } from "@clerk/clerk-react";
@@ -41,6 +41,8 @@ const searchBooks = async (query) => {
   }
 };
 
+import PropTypes from "prop-types";
+
 const BookCard = ({ book }) => (
   <div className="flex flex-col items-center p-6 bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
     <img
@@ -60,6 +62,16 @@ const BookCard = ({ book }) => (
   </div>
 );
 
+BookCard.propTypes = {
+  book: PropTypes.shape({
+    imageLinks: PropTypes.shape({
+      thumbnail: PropTypes.string,
+    }),
+    title: PropTypes.string,
+    authors: PropTypes.arrayOf(PropTypes.string),
+  }).isRequired,
+};
+
 export default function Landing() {
   const [newArrivals, setNewArrivals] = useState([]);
   const [trendingBooks, setTrendingBooks] = useState([]);
@@ -70,7 +82,7 @@ export default function Landing() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (user) {
+    if (user.isLoaded && user.isSignedIn) {
       navigate("/search-books");
     }
 
