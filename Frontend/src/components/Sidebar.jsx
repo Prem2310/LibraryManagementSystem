@@ -4,28 +4,47 @@ import { GiBookshelf } from "react-icons/gi";
 
 export default function Sidebar() {
   return (
-    <div
-      className="w-[15vw] h-[100vh] bg-orange-200">
-      <div className="flex flex-col">
-        <div className="sidebar-links flex">
-          <div className="text-orange-500">
-            <IoMdHome />
+    <div className="w-[20vw]  flex flex-col justify-between">
+      <div className="flex flex-col m-auto mt-[15vh] gap-[5vh]">
+        <div className="sidebar-links flex  text-xl gap-[1vw]">
+          <div className="text-stone-500   ">
+            <IoMdHome className="h-[5vh] w-[5vh]" />
           </div>
-          <a>Home</a>{" "}
-        </div>
-        <div className="sidebar-links flex">
-          <div className="text-orange-500">
-            <IoSearchSharp />
-          </div>
-          <a>Search</a>{" "}
-        </div>
-        <div className="sidebar-links flex">
-          <div className="text-orange-500">
+          <div>
             {" "}
-            <GiBookshelf className="" />
+            <a
+              href="#"
+              className=" text-stone-500 font-normal align-baseline  focus:text-black focus:font-semibold hover:text-black ">
+              Home
+            </a>{" "}
           </div>
-          <a>My Shelf</a>{" "}
         </div>
+        <div className="sidebar-links flex  text-xl gap-[1vw]">
+          <div className="text-stone-500  ">
+            <IoSearchSharp className="h-[5vh] w-[5vh]" />
+          </div>
+          <a
+            href="#"
+            className=" text-stone-500 font-normal align-baseline focus:text-black focus:font-semibold hover:text-black ">
+            Search
+          </a>{" "}
+        </div>
+        <div className="sidebar-links flex font-normal text-xl gap-[1vw]">
+          <div className="text-stone-500 ">
+            {" "}
+            <GiBookshelf className="h-[5vh] w-[5vh]" />
+          </div>
+          <a
+            href="#"
+            className=" text-stone-500 font-normal align-baseline focus:text-black focus:font-semibold hover:text-black ">
+            My Shelf
+          </a>{" "}
+        </div>
+      </div>
+      <div className="text-stone-500  flex flex-col mx-auto mb-[3vh]   gap-[1vh]">
+        <a href="">About</a>
+        <a href="">Support</a>
+        <a href="">Terms & Conditions</a>
       </div>
     </div>
   );
