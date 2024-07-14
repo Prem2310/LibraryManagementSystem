@@ -3,7 +3,7 @@ import { SignUp } from "@clerk/clerk-react"; // Assuming you're using React Rout
 export default function Signup() {
   return (
     <div className="flex justify-center items-center">
-      <SignUp path="/signup" routing="path" />
+      <SignUp></SignUp>
     </div>
   );
 }

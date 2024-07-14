@@ -1,7 +1,8 @@
-import { IoSearchSharp} from "react-icons/io5";
+import { IoSearchSharp } from "react-icons/io5";
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-
+import { useNavigate } from "react-router-dom";
+import { useUser } from "@clerk/clerk-react";
 
 const SAMPLE_ISBNS = [
   "9781787123427",
@@ -64,8 +65,15 @@ export default function Landing() {
   const [trendingBooks, setTrendingBooks] = useState([]);
   const [searchResults, setSearchResults] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
+  const user = useUser();
+  console.log(user);
+  const navigate = useNavigate();
 
   useEffect(() => {
+    if (user) {
+      navigate("/search-books");
+    }
+
     const fetchInitialBooks = async () => {
       const newArrivalsData = await Promise.all(
         SAMPLE_ISBNS.slice(0, 5).map((isbn) => fetchBookData(isbn))
@@ -126,7 +134,8 @@ export default function Landing() {
               />
               <button
                 type="submit"
-                className="px-6 bg-orange-500 text-white rounded-r-full hover:bg-orange-600 transition-colors duration-300">
+                className="px-6 bg-orange-500 text-white rounded-r-full hover:bg-orange-600 transition-colors duration-300"
+              >
                 <IoSearchSharp className="text-2xl" />
               </button>
             </form>

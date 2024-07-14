@@ -4,14 +4,12 @@ import Sidebar from "../components/Sidebar";
 
 export const BookSearchPage = () => {
   return (
-    <div>
-      <Navbar />{" "}
-      <div className="flex">
-        <div></div>
+    <div className="flex flex-col h-screen ">
+      <Navbar />
+      <div className="flex flex-1 overflow-hidden ">
         <Sidebar />
-        <div>
-          {" "}
-          <SearchBooks  />
+        <div className="flex-1 overflow-x-hidden">
+          <SearchBooks />
         </div>
       </div>
     </div>
