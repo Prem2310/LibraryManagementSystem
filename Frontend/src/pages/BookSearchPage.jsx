@@ -11,7 +11,7 @@ export const BookSearchPage = () => {
         <Sidebar />
         <div>
           {" "}
-          <SearchBooks />
+          <SearchBooks  />
         </div>
       </div>
     </div>
