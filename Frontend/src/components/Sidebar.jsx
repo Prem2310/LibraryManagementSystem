@@ -8,7 +8,7 @@ import {
 } from "react-icons/io5";
 import { RiDashboardLine, RiUserLine, RiBookletLine } from "react-icons/ri";
 
-export default function AdminSidebar() {
+export default function Sidebar() {
   return (
     <div className="bg-gradient-to-b  overflow-y-hidden from-orange-600 to-orange-800 w-64 min-h-screen text-white">
       <nav className="mt-6">
