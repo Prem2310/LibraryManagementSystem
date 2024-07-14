@@ -2,9 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { IoSearchSharp, IoHeartOutline, IoHeart } from 'react-icons/io5';
 import axios from 'axios';
 
-const defaultBooksQuery = 'bestsellers'; // Default query to show some books on load
+const defaultBooksQuery = 'bestsellers'; 
 
-const SearchBooks = () => {
+const AdminSearchBooks = () => {
   const [books, setBooks] = useState([]);
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedGenre, setSelectedGenre] = useState('');
@@ -80,7 +80,7 @@ const SearchBooks = () => {
 
       <div className="flex-grow px-16">
         <table className="w-full bg-white shadow-md rounded-lg overflow-hidden">
-          <thead className="bg-orange-200 text-gray-700">
+          <thead className="bg-gray-200 text-gray-700">
             <tr>
               <th className="py-3 px-4 text-left">Image</th>
               <th className="py-3 px-4 text-left">Title</th>
@@ -104,12 +104,7 @@ const SearchBooks = () => {
                     <span className={`inline-block w-3 h-3 rounded-full mr-2 ${book.availability === 'Available' ? 'bg-green-500' : 'bg-red-500'}`}></span>
                     {book.availability}
                   </td>
-                  <td className="py-3 px-4 flex gap-2 mt-8">
-                    <button
-                      className={`px-3 py-1 rounded-full text-white ${book.availability === 'Available' ? 'bg-orange-500 hover:bg-orange-600' : 'bg-gray-500 hover:bg-gray-600'}`}
-                    >
-                      {book.availability === 'Available' ? 'Borrow' : 'Notify'}
-                    </button>
+                  <td className="py-3 px-4">
                     <button onClick={() => toggleFavorite(book.id)} className="text-orange-500 hover:text-orange-600">
                       {book.favorite ? <IoHeart /> : <IoHeartOutline />}
                     </button>
@@ -130,4 +125,4 @@ const SearchBooks = () => {
   );
 };
 
-export default SearchBooks;
+export default AdminSearchBooks;
