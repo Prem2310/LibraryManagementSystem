@@ -1,21 +1,52 @@
+import React from "react";
+import {
+  IoNotificationsOutline,
+  IoPersonCircleOutline,
+  IoMenuOutline,
+} from "react-icons/io5";
+
 export default function Navbar() {
   return (
-    <div className=" h-[10vh] flex justify-between ">
-      <div className="nav-left flex">
-        <div
-          className="  h-[7vh] w-[14vw]
- self-center bg-orange-100 pt-1 ml-2 text-center text-2xl">
-          Public Library
+    <nav className="bg-white shadow-md">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex justify-between items-center h-16">
+          <div className="flex items-center">
+            <button className="text-gray-500 hover:text-orange-600 focus:outline-none focus:text-orange-600 mr-4">
+              <IoMenuOutline className="h-6 w-6" />
+            </button>
+            <span className="text-2xl font-bold text-orange-600">
+              Public Library
+            </span>
+          </div>
+          <div className="flex items-center">
+            <div className="relative">
+              <input
+                type="text"
+                placeholder="Search..."
+                className="bg-gray-100 rounded-full py-2 px-4 pl-10 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:bg-white"
+              />
+              <span className="absolute left-3 top-2 text-gray-400">
+                <svg
+                  className="h-5 w-5"
+                  fill="none"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor">
+                  <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                </svg>
+              </span>
+            </div>
+            <button className="ml-4 text-gray-500 hover:text-orange-600 focus:outline-none focus:text-orange-600">
+              <IoNotificationsOutline className="h-6 w-6" />
+            </button>
+            <button className="ml-4 text-gray-500 hover:text-orange-600 focus:outline-none focus:text-orange-600">
+              <IoPersonCircleOutline className="h-6 w-6" />
+            </button>
+          </div>
         </div>
       </div>
-      <div className="nav-right flex ">
-        <button className=" w-[8vw] h-[7vh] text-xl font-semibold bg-orange-100 text-orange-600 border border-orange-600 self-center rounded-full hover:bg-orange-600 hover:text-white">
-          Login
-        </button>
-        <button className="  w-[8vw] h-[7vh] text-xl font-semibold bg-orange-100 text-orange-600 border border-orange-600 self-center rounded-full m-5 hover:bg-orange-600 hover:text-white">
-          Sign In
-        </button>
-      </div>
-    </div>
+    </nav>
   );
 }
