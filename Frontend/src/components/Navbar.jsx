@@ -1,9 +1,5 @@
 import React from "react";
-import {
-  IoNotificationsOutline,
-  IoPersonCircleOutline,
-  IoMenuOutline,
-} from "react-icons/io5";
+import { IoNotificationsOutline, IoPersonCircleOutline } from "react-icons/io5";
 
 export default function Navbar() {
   return (
@@ -11,8 +7,7 @@ export default function Navbar() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           <div className="flex items-center">
-            <button className="text-gray-500 hover:text-orange-600 focus:outline-none focus:text-orange-600 mr-4">
-            </button>
+            <button className="text-gray-500 hover:text-orange-600 focus:outline-none focus:text-orange-600 mr-4"></button>
             <span className="text-2xl font-bold text-orange-600">
               Public Library
             </span>

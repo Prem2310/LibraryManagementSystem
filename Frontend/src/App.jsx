@@ -18,7 +18,7 @@ function App() {
           <Route path="/admin-books" element={<AdminSearchPage/>} />
           <Route path="/lib-stats" element={<LibStatsPage/>} />
           <Route path="/signin" element={<Signin />} />
-          <Route path="/update-books" element={<AdminPage/>} />
+          <Route path="/update-books" element={<AdminPage />} />
 
         </Routes>
       </BrowserRouter>
