@@ -95,7 +95,7 @@ const SearchBooks = () => {
               filteredBooks.map((book) => (
                 <tr key={book.id} className="border-b border-gray-200 hover:bg-gray-50">
                   <td className="py-3 px-4">
-                    <img src={book.image} alt={book.title} className="w-16 h-24 object-cover" />
+                    <img src={book.image} alt={book.title} className="w-20 h-24 object-cover" />
                   </td>
                   <td className="py-3 px-4">{book.title}</td>
                   <td className="py-3 px-4">{book.authors}</td>
