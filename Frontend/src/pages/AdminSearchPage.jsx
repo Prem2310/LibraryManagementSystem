@@ -1,10 +1,11 @@
-import AdminSearchBooks from "../components/AdminSearchBooks"
-
+import AdminSearchBooks from "../components/AdminSearchBooks";
+import Navbar from "../components/Navbar";
 export const AdminSearchPage = () => {
-    return (
-        <>
-            <AdminSearchBooks/>
-        
-        </>
-    )
-}
+  return (
+    <>
+      {" "}
+      <Navbar />
+      <AdminSearchBooks />
+    </>
+  );
+};
