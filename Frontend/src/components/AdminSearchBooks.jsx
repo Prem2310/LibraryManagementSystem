@@ -1,39 +1,35 @@
-import React, { useState, useEffect } from "react";
-import {
-  IoSearchSharp,
-  IoHeartOutline,
-  IoHeart,
-  IoFilterOutline,
-} from "react-icons/io5";
+import { useState, useEffect } from "react";
+import { IoSearchSharp, IoFilterOutline } from "react-icons/io5";
 import axios from "axios";
-
-const defaultBooksQuery = "bestsellers";
+import { useUser } from "@clerk/clerk-react";
 
 const AdminSearchBooks = () => {
+  const { user } = useUser(); // Get user metadata from Clerk
+  const userId = user ? user.id : null; // Get user ID
+  console.log("userId", userId);
+
   const [books, setBooks] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedGenre, setSelectedGenre] = useState("");
   const [loading, setLoading] = useState(true);
 
-  const fetchBooks = async (query) => {
+  const fetchBooks = async (query = "") => {
+    // console.log(userId);
     setLoading(true);
     try {
       const response = await axios.get(
-        `https://www.googleapis.com/books/v1/volumes?q=${query}&maxResults=10`
+        `http://localhost:3000/api/books?q=${query}`
       );
-      const fetchedBooks =
-        response.data.items?.map((item) => ({
-          id: item.id,
-          title: item.volumeInfo.title,
-          authors: item.volumeInfo.authors?.join(", ") || "Unknown",
-          category: item.volumeInfo.categories?.[0] || "Uncategorized",
-          availability: Math.random() > 0.5 ? "Available" : "Out of Stock",
-          favorite: false,
-          image:
-            item.volumeInfo.imageLinks?.thumbnail ||
-            "https://via.placeholder.com/150",
-        })) || [];
-      setBooks(fetchedBooks);
+      const mappedBooks = response.data.map((book) => ({
+        id: book._id, // Assuming _id is the unique identifier
+        title: book.title,
+        authors: book.authors.join(", ") || "Unknown",
+        category: book.categories?.[0] || "Uncategorized",
+        availability: book.available > 0 ? "Available" : "Out of Stock",
+        favorite: false,
+        image: book.imageLinks?.thumbnail || "https://via.placeholder.com/150",
+      }));
+      setBooks(mappedBooks);
     } catch (error) {
       console.error("Error fetching books:", error);
       setBooks([]);
@@ -43,20 +39,12 @@ const AdminSearchBooks = () => {
   };
 
   useEffect(() => {
-    fetchBooks(defaultBooksQuery);
+    fetchBooks(""); // Fetch all books initially
   }, []);
 
   const handleSearch = (e) => {
     e.preventDefault();
-    fetchBooks(searchQuery);
-  };
-
-  const toggleFavorite = (id) => {
-    setBooks(
-      books.map((book) =>
-        book.id === id ? { ...book, favorite: !book.favorite } : book
-      )
-    );
+    fetchBooks(searchQuery); // Fetch books based on the search query
   };
 
   const filteredBooks = books.filter(
@@ -168,7 +156,7 @@ const AdminSearchBooks = () => {
                 ) : (
                   <tr>
                     <td
-                      colSpan="6"
+                      colSpan="5"
                       className="py-8 px-4 text-center text-gray-500"
                     >
                       No books found. Try a different search query.

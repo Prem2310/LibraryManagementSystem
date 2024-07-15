@@ -6,7 +6,6 @@ import { useUser } from "@clerk/clerk-react";
 const SearchBooks = () => {
   const { user } = useUser(); // Get user metadata from Clerk
   const userId = user ? user.id : null; // Get user ID
-  console.log("userId", userId);
 
   const [books, setBooks] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
@@ -54,13 +53,13 @@ const SearchBooks = () => {
       console.error("User is not authenticated.");
       return;
     }
-
-    const requestBody = { userId }; // Prepare the request body
+    const requestBody = { userId, bookId }; // Prepare the request body
+    console.log("Borrowing book with ID:", bookId); // Log the book ID
     console.log("Request body:", requestBody); // Log the request body
 
     try {
       const response = await axios.post(
-        `http://localhost:3000/api/books/${bookId}/borrow`,
+        `http://localhost:3000/api/books/borrow`,
         requestBody
       );
       console.log(response.data);

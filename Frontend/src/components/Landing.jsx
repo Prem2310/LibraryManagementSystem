@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useUser } from "@clerk/clerk-react";
+import PropTypes from "prop-types";
 
 const SAMPLE_ISBNS = [
   "9781787123427",
@@ -41,8 +42,6 @@ const searchBooks = async (query) => {
   }
 };
 
-import PropTypes from "prop-types";
-
 const BookCard = ({ book }) => (
   <div className="flex flex-col items-center p-6 bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
     <img
@@ -78,11 +77,33 @@ export default function Landing() {
   const [searchResults, setSearchResults] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
   const user = useUser();
-  console.log(user);
+  const isLoaded = user.isLoaded;
+  const userId = user.user?.id;
+  console.log("User ID:", userId);
+
   const navigate = useNavigate();
 
+  const addUser = async () => {
+    console.log("User is authenticated and user ID is available.");
+    try {
+      const response = await axios.post(
+        "http://localhost:3000/api/auth/clerkSignup",
+        {
+          userId: userId,
+        }
+      );
+      console.log("User added to database successfully:", response.data);
+    } catch (error) {
+      console.error(
+        "Error adding user to database:",
+        error.response?.data || error.message
+      );
+    }
+  };
+
   useEffect(() => {
-    if (user.isLoaded && user.isSignedIn) {
+    if (isLoaded && user.isSignedIn && userId) {
+      addUser();
       navigate("/search-books");
     }
 
@@ -98,7 +119,7 @@ export default function Landing() {
     };
 
     fetchInitialBooks();
-  }, []);
+  }, [isLoaded, user.isSignedIn, userId]);
 
   useEffect(() => {
     const delayDebounce = setTimeout(async () => {

@@ -153,3 +153,33 @@ exports.login = async (req, res) => {
     });
   }
 };
+
+// when i signup from clerk i want to push the clerk id and email to user schema in user collection
+
+exports.clerkSignup = async (req, res) => {
+  try {
+    const { userId } = req.body;
+    const clerk = await User.findOne({ userId });
+    console.log(userId);
+    if (clerk) {
+      return res.status(400).json({
+        success: false,
+        message: "Email is already in registered",
+      });
+    }
+    const user = await User.create({
+      userId: userId,
+    });
+    return res.status(200).json({
+      success: true,
+      user,
+      message: "new clerk registered Successfully",
+    });
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({
+      success: false,
+      message: "Clerk cannot be registered , please try again",
+    });
+  }
+};

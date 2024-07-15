@@ -6,6 +6,7 @@ const {
   updateBook,
   deleteBook,
   fetchTrendingBooks,
+  borrowBook,
 } = require("../controllers/Book");
 
 // Define routes
@@ -13,6 +14,8 @@ router.get("/", getAllBooks);
 router.post("/", addBook);
 router.put("/:id", updateBook);
 router.delete("/:id", deleteBook);
+router.post("/borrow", borrowBook);
+
 router.get("/trending", async (req, res) => {
   try {
     const trendingBooks = await fetchTrendingBooks();

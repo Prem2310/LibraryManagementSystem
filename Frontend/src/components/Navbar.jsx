@@ -3,11 +3,8 @@ import { useNavigate } from "react-router-dom";
 import { UserButton, useUser } from "@clerk/clerk-react";
 
 export default function Navbar() {
-  const { isSignedIn, user } = useUser();
+  const { isSignedIn } = useUser();
 
-  if (isSignedIn) {
-    console.log(user);
-  }
   const Navigate = useNavigate();
   return (
     <nav className="bg-white shadow-md">

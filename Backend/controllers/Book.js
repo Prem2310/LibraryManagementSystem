@@ -118,12 +118,12 @@ async function fetchTrendingBooks() {
 // Borrow a book
 const borrowBook = async (req, res) => {
   try {
-    const userId = req.user.id; // Assuming user info is in req.user
-    const bookId = req.params.id; // Get book ID from the request parameters
+    const { userId, bookId } = req.body; // Get user ID and book ID from the request body
 
     // Find the book
+    console.log("Borrowing book with ID:", bookId);
     const book = await Book.findById(bookId);
-
+    console.log("Book found:", book);
     if (!book) {
       return res.status(404).json({ message: "Book not found" });
     }
@@ -137,21 +137,25 @@ const borrowBook = async (req, res) => {
 
     // Decrement the number of available copies
     book.numOfCopies -= 1; // Decrease count by one
-
-    // If there are no copies left, set isAvailable to false
     if (book.numOfCopies === 0) {
-      book.isAvailable = false; // Mark book as not available
+      book.isAvailable = false; // Mark book as not available if no copies are left
     }
 
     await book.save(); // Save the updated book
 
+    // Find the user by userId
+    const user = await User.findOne({ userId });
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
     // Update the user's borrowedBooks
-    const user = await User.findById(userId);
     user.borrowedBooks.push(bookId); // Add book to the user's borrowed list
     await user.save(); // Save the updated user
 
     res.status(200).json({ message: "Book borrowed successfully", book });
   } catch (error) {
+    console.error("Error borrowing book:", error);
     res
       .status(500)
       .json({ message: "Error borrowing book", error: error.message });
@@ -164,4 +168,5 @@ module.exports = {
   updateBook,
   deleteBook,
   fetchTrendingBooks,
+  borrowBook,
 };
