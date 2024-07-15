@@ -7,11 +7,10 @@ export default function Navbar() {
 
   const Navigate = useNavigate();
   return (
-    <nav className="bg-white shadow-md">
+    <nav className="bg-white shadow-md ">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           <div className="flex items-center">
-            <button className="text-gray-500 hover:text-orange-600 focus:outline-none focus:text-orange-600 mr-4"></button>
             <img
               src="https://img.icons8.com/ios/452/books.png"
               alt="logo"
