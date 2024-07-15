@@ -146,7 +146,7 @@ export default function Landing() {
     <div className="flex flex-col min-h-screen bg-gradient-to-br from-orange-100 to-white">
       <main className="flex-grow">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-          <div className="text-center mb-12">
+          <div className=" mt-10 text-center mb-12">
             <h1 className="text-4xl font-bold text-gray-900 mb-4">
               Welcome to Your Public Library
             </h1>
