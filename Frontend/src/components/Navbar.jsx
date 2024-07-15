@@ -12,7 +12,12 @@ export default function Navbar() {
         <div className="flex justify-between items-center h-16">
           <div className="flex items-center">
             <button className="text-gray-500 hover:text-orange-600 focus:outline-none focus:text-orange-600 mr-4"></button>
-            <span className="text-2xl font-bold text-orange-600">
+            <img
+              src="https://img.icons8.com/ios/452/books.png"
+              alt="logo"
+              className="h-8 w-8 ml-2 hover:scale-110"
+            />
+            <span className="text-2xl font-bold text-orange-600  ml-1 hover:text-orange-500">
               Public Library
             </span>
           </div>
@@ -56,7 +61,7 @@ export default function Navbar() {
                 </button>
                 <button
                   onClick={() => Navigate("/signin")}
-                  className="ml-4 text-gray-500 hover:text-orange-600 focus:outline-none focus:text-orange-600"
+                  className="ml-4 text-gray-500 hover:text-orange-600 focus: focus:text-orange-600 "
                 >
                   Sign In
                 </button>
