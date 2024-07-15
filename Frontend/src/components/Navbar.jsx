@@ -8,13 +8,13 @@ export default function Navbar() {
   const Navigate = useNavigate();
   return (
     <nav className="bg-white shadow-md ">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto px-4 sm:px-2 lg:px-8">
         <div className="flex justify-between items-center h-16">
           <div className="flex items-center">
             <img
               src="https://img.icons8.com/ios/452/books.png"
               alt="logo"
-              className="h-8 w-8 ml-2 hover:scale-110"
+              className="h-8 w-8  hover:scale-110"
             />
             <span className="text-2xl font-bold text-orange-600  ml-1 hover:text-orange-500">
               Public Library
